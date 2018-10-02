@@ -1,0 +1,13 @@
+body {
+    width: 90%;
+    margin: 0 auto;
+    text-align:center;
+}
+
+header {
+    margin: 2em 0;
+}
+
+.game-box {
+    border: 1em black
+}
