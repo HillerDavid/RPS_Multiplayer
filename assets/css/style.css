@@ -11,3 +11,11 @@ header {
 .game-box {
     border: 1em black
 }
+
+#score-row {
+    margin: 1% 0 2% 0;
+}
+
+#chat-container {
+    text-align: justify;
+}
