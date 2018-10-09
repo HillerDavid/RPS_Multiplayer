@@ -5,11 +5,29 @@ body {
 }
 
 header {
-    margin: 2em 0;
+    margin: 1em 0;
+}
+
+.game-area {
+    margin-top: 2em;
 }
 
 .game-box {
-    border: 1em black
+    border: 1em black;
+}
+
+.player-1-pick, .player-2-pick {
+    width: 100%;
+    height: 100%;
+    align-content: center;
+}
+
+.waiting {
+    width: 50%;
+}
+
+#player-1-options, #player-2-options {
+    display: none;
 }
 
 #score-row {
