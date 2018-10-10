@@ -215,5 +215,5 @@ chatBox.on("child_added", function (snap) {
     $("#chat-box").append(newMessage)
     $("#chat-input").val("")
 
-    $("body").scrollspy({ target: $("#chat-box")})
+    $("#chat-box").stop().animate({ scrollTop: $("#chat-box")[0].scrollHeight }, 2000)
 })

@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    margin: 1em 0;
+    margin: 0.5em 0;
 }
 
 .game-area {
@@ -39,5 +39,8 @@ header {
 }
 
 #chat-box {
-    overflow-y: auto
+    height: 14em;
+    background: rgba(220, 220, 220, 0.616);
+    overflow-y: auto;
+    margin: 0 0 2em 0;
 }
