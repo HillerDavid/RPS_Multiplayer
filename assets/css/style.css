@@ -37,3 +37,7 @@ header {
 #chat-container {
     text-align: justify;
 }
+
+#chat-box {
+    overflow-y: auto
+}

@@ -71,11 +71,10 @@ player1.child("name").on("value", function (snap) {
         $("#player-1-name").text(snap.val())
         $("#player-1-waiting").hide()
         $("#player-1-options").css("display", "flex")
-    } else if (playerNumber === 0) {
+    } else if (snap.exists() === false) {
         $("#player-1-name").text("")
-        $("#player-1-options").hide()
         $("#player-1-waiting").css("display", "flex")
-        $("#name-form").css("display", "flex")
+        $("#player-1-options").hide()
     }
 })
 
@@ -84,11 +83,10 @@ player2.child("name").on("value", function (snap) {
         $("#player-2-name").text(snap.val())
         $("#player-2-waiting").hide()
         $("#player-2-options").css("display", "flex")
-    } else if (playerNumber === 0) {
+    } else if (snap.exists() === false && playerNumber !== 0) {
         $("#player-2-name").text("")
-        $("#player-2-options").hide()
         $("#player-2-waiting").css("display", "flex")
-        $("#name-form").css("display", "flex")
+        $("#player-2-options").hide()
     }
 })
 
@@ -114,13 +112,13 @@ $(document).on("click", ".player-2-pick", function () {
 
 //Listen for players to make choice
 playersRef.on("value", function (snap) {
-    if (snap.child(playerNumber).child("pick").exists()) {
+    if (snap.child(1).child("pick").exists()) {
         $("#player-1-options").hide()
         $("#player-1-waiting").css("display", "flex")
         player1Picked = true
     }
 
-    if (snap.child(playerNumber).child("pick").exists()) {
+    if (snap.child(2).child("pick").exists()) {
         $("#player-2-options").hide()
         $("#player-2-waiting").css("display", "flex")
         player2Picked = true
@@ -209,15 +207,13 @@ $(document).on("click", "#chat-submit", function (event) {
     $("chat-input").val("")
 })
 
-
-
-
 chatBox.on("child_added", function (snap) {
     var name = playerName
     var message = snap.val().message
 
-    var newMessage = $("<p>").text(": " + message)
-    newMessage.prepend($("<span>").text(name))
+    var newMessage = $("<p>").text(name + ": " + message)
     $("#chat-box").append(newMessage)
+    $("#chat-input").val("")
 
+    $("body").scrollspy({ target: $("#chat-box")})
 })
