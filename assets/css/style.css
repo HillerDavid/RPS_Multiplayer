@@ -31,10 +31,10 @@ header {
 
 #name-form {
     margin-bottom: 2em;
-    border: solid 0.5em silver;
+    border: solid 0.25em silver;
     border-radius: 1em;
     background: blue;
-    padding: .25em;
+    padding-bottom: 0.2em;
 }
 
 #instructions {
@@ -58,10 +58,23 @@ header {
 }
 
 #chat-box {
+    font: aliceblue;
     height: 14em;
-    background: rgba(220, 220, 220, 0.616);
+    background: blue;
     overflow-y: auto;
     margin: 0 0 2em 0;
+    border: solid 0.25em silver;
+    border-radius: 1em;
+    padding: .25em;
+}
+
+#chat-input-area {
+    margin: 0;
+}
+
+#chat-submit {
+    background: silver;
+    color: black;
 }
 
 #score-row {

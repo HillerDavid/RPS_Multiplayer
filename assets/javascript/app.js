@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     database = firebase.database()
 
-
+    // Connection variables
     var connectionsRef = database.ref("/connections")
     var connectedRef = database.ref(".info/connected")
     var playersRef = database.ref("/players")
@@ -22,12 +22,13 @@ $(document).ready(function () {
     var player2 = database.ref("/players/2")
     var chatBox = database.ref("/chat")
 
+    // Global variables
     var playerNumber = 0
     var playerName
     var player1Picked
     var player2Picked
-    var tieGames = 0
 
+    // Listen for new connections
     connectedRef.on("value", function (snap) {
         if (snap.val()) {
             var con = connectionsRef.push(true)
@@ -35,12 +36,15 @@ $(document).ready(function () {
         }
     })
 
-    // Determine if a player slot open
-    // if no player slot open offer option to try again
+    // Listener to determine if a player slot open
     playersRef.on("value", function (snap) {
+
+        // If no free slots, remove form to enter game
         if (snap.child(1).exists() === true && snap.child(2).exists() === true) {
             $("#name-form").hide()
         }
+
+        // If player slot free, show form for new player to enter
         else {
             $("#name-form").show()
         }
@@ -49,7 +53,10 @@ $(document).ready(function () {
     // Player enters name and gets assigned player box
     $("#name-submit").click(function (event) {
         event.preventDefault()
+
         var name = $("#name-input").val().trim()
+
+        // Assign player number
         playersRef.once("value", function (snap) {
             var num = snap.numChildren()
             if (num === 0) {
@@ -59,7 +66,11 @@ $(document).ready(function () {
             } else {
                 playerNumber = 2
             }
+
+            // Set player name
             playerName = name
+
+            // Listener to reset player slot when player disconnects
             playersRef.child(playerNumber).onDisconnect().remove()
             database.ref("players/" + playerNumber).set({
                 name: name,
@@ -67,6 +78,14 @@ $(document).ready(function () {
                 losses: 0
             })
         })
+
+        // Push message to chat box announcing new player
+        chatBox.push({
+            name: "Mog",
+            message: playerName + " has entered the game!"
+        })
+
+        // Hide form to submit name to enter game
         $("#name-input").val("")
         $("#name-form").hide()
     })
@@ -118,18 +137,22 @@ $(document).ready(function () {
 
     //Listen for players to make choice
     playersRef.on("value", function (snap) {
+
+        // Listens for player 1 and sets to true on pick
         if (snap.child(1).child("pick").exists()) {
             $("#player-1-options").hide()
             $("#player-1-waiting").css("display", "flex")
             player1Picked = true
         }
 
+        // Listens for player 2 and sets to true on pick
         if (snap.child(2).child("pick").exists()) {
             $("#player-2-options").hide()
             $("#player-2-waiting").css("display", "flex")
             player2Picked = true
         }
 
+        // Once both players have picked determine winner
         if (player1Picked === true && player2Picked === true) {
             var player1Pick = snap.child(1).child("pick").val()
             player1Picked = false
@@ -147,7 +170,7 @@ $(document).ready(function () {
                 case "rockscissors":
                 case "scissorspaper":
                 case "paperrock":
-                    $("#result-box").html("<img src='assets/images/" + player1Pick + ".jpg'>")
+                    $("#result-box").html("<img src='assets/images/" + player1Pick + ".png'>")
                     $("#result-name").text(player1.name)
                     player1Wins++
                     player1.update({
@@ -161,7 +184,7 @@ $(document).ready(function () {
                 case "rockpaper":
                 case "scissorsrock":
                 case "paperscissors":
-                    $("#result-box").html("<img src='assets/images/" + player2Pick + ".jpg'>")
+                    $("#result-box").html("<img src='assets/images/" + player2Pick + ".png'>")
                     $("#result-name").text(player2.name)
                     player2Wins++
                     player2.update({
@@ -203,7 +226,7 @@ $(document).ready(function () {
         $("#player-2-losses").text(snap.val())
     })
 
-    // Chat box
+    // Send message to database
     $(document).on("click", "#chat-submit", function (event) {
         event.preventDefault()
 
@@ -214,15 +237,17 @@ $(document).ready(function () {
             message: message
         })
 
-        $("chat-input").val("")
     })
 
+    // Chat listener for new messages
     chatBox.on("child_added", function (snap) {
-        var name = playerName
-        var message = snap.val().message
 
+        var name = snap.val().name
+        var message = snap.val().message
+        console.log(name + message)
         var newMessage = $("<p>").text(name + ": " + message)
         $("#chat-box").append(newMessage)
+        console.log(newMessage)
         $("#chat-input").val("")
 
         $("#chat-box").stop().animate({ scrollTop: $("#chat-box")[0].scrollHeight }, 2000)
