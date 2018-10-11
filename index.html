@@ -13,10 +13,13 @@
 </head>
 
 <body>
-    <header class="display-1" id="game-header">
-        Rock, Paper, Scissors!
+
+    <header class="display-4" id="game-header">
+        Knight, Wizard, Archer
     </header>
+
     <div class="container">
+
         <div class="row justify-content-center" id="name-form">
             <form>
                 <h4>Enter name:</h4><br>
@@ -24,19 +27,41 @@
                 <input type="submit" id="name-submit">
             </form>
         </div>
+        <div class="row justify-content-center" id="instructions">
+            <div class="col-4">
+                <div class="col-12">
+                    <img src="assets/images/rock.png">
+                </div>
+                Knight defeats Archer
+            </div>
+            <div class="col-4">
+                <div class="col-12">
+                    <img src="assets/images/paper.png">
+                </div>
+                Wizard defeats Knight
+            </div>
+            <div class="col-4">
+                <div class="col-12">
+                    <img src="assets/images/scissors.png">
+                </div>
+                Archer defeats Wizard
+            </div>
+        </div>
+
+
 
         <div class="row game-area">
 
             <div class="col-4 game-box" id="player-1-box">
                 <div class="row" id="player-1-options">
                     <div class="col-4">
-                        <img src="assets/images/rock.jpg" id="player-1-rock" class="player-1-pick" data-pick="rock">
+                        <img src="assets/images/rock.png" id="player-1-rock" class="player-1-pick" data-pick="rock">
                     </div>
                     <div class="col-4">
-                        <img src="assets/images/paper.jpg" id="player-1-paper" class="player-1-pick" data-pick="paper">
+                        <img src="assets/images/paper.png" id="player-1-paper" class="player-1-pick" data-pick="paper">
                     </div>
                     <div class="col-4">
-                        <img src="assets/images/scissors.jpg" id="player-1-scissors" class="player-1-pick" data-pick="scissors">
+                        <img src="assets/images/scissors.png" id="player-1-scissors" class="player-1-pick" data-pick="scissors">
                     </div>
                 </div>
                 <div class="row" id="player-1-waiting">
@@ -47,19 +72,17 @@
 
                 Player 1: <span id="player-1-name"></span>
             </div>
-            <div class="col-3 game-box" id="result-box">
-                Result
-            </div>
+            <div class="col-3 game-box" id="result-box"></div>
             <div class="col-4 game-box" id="player-2-box">
                 <div class="row" id="player-2-options">
                     <div class="col-4">
-                        <img src="assets/images/rock.jpg" id="player-2-rock" class="player-2-pick" data-pick="rock">
+                        <img src="assets/images/rock.png" id="player-2-rock" class="player-2-pick" data-pick="rock">
                     </div>
                     <div class="col-4">
-                        <img src="assets/images/paper.jpg" id="player-2-paper" class="player-2-pick" data-pick="paper">
+                        <img src="assets/images/paper.png" id="player-2-paper" class="player-2-pick" data-pick="paper">
                     </div>
                     <div class="col-4">
-                        <img src="assets/images/scissors.jpg" id="player-2-scissors" class="player-2-pick" data-pick="scissors">
+                        <img src="assets/images/scissors.png" id="player-2-scissors" class="player-2-pick" data-pick="scissors">
                     </div>
                 </div>
                 <div class="row" id="player-2-waiting">
@@ -83,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3" id="tie-game-score">Ties:<span id="tie-games"></span></div>
+            <div class="col-3"></div>
             <div class="col-4" id="player-2-score">
                 <div class="row">
                     <div class="col-6">
@@ -97,7 +120,7 @@
         </div>
 
         <div class="container" data-spy="scroll" id="chat-box">
-        
+
         </div>
 
         <div class="row">
