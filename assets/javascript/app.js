@@ -171,7 +171,7 @@ $(document).ready(function () {
                 case "scissorspaper":
                 case "paperrock":
                     $("#result-box").html("<img src='assets/images/" + player1Pick + ".png'>")
-                    $("#result-name").text(player1.name)
+                    $("#result-name").text(snap.child(1).child("name").val())
                     player1Wins++
                     player1.update({
                         wins: player1Wins
@@ -185,7 +185,7 @@ $(document).ready(function () {
                 case "scissorsrock":
                 case "paperscissors":
                     $("#result-box").html("<img src='assets/images/" + player2Pick + ".png'>")
-                    $("#result-name").text(player2.name)
+                    $("#result-name").text(snap.child(2).child("name").val())
                     player2Wins++
                     player2.update({
                         wins: player2Wins
@@ -231,7 +231,7 @@ $(document).ready(function () {
         event.preventDefault()
 
         var message = $("#chat-input").val()
-        console.log(message)
+        
         chatBox.push({
             name: playerName,
             message: message
@@ -242,12 +242,13 @@ $(document).ready(function () {
     // Chat listener for new messages
     chatBox.on("child_added", function (snap) {
 
+        // Stores value of message object keys into variables
         var name = snap.val().name
         var message = snap.val().message
-        console.log(name + message)
+
+        // Create how message will appear and append it to chat box
         var newMessage = $("<p>").text(name + ": " + message)
         $("#chat-box").append(newMessage)
-        console.log(newMessage)
         $("#chat-input").val("")
 
         $("#chat-box").stop().animate({ scrollTop: $("#chat-box")[0].scrollHeight }, 2000)

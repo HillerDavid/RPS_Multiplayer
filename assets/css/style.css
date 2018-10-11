@@ -49,6 +49,10 @@ header {
     display: none;
 }
 
+#result-box img {
+    width: 7em;
+}
+
 #score-row {
     margin: 1% 0 2% 0;
 }
